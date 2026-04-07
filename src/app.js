@@ -9,6 +9,7 @@ const helmet = require('helmet');
 const path = require('path');
 const app = express();
 app.set('etag', false);
+app.set('trust proxy', true);
 const helmetOptions = {
   // 1. Disable CSP if you aren't serving HTML/Assets
   // This prevents overhead and "Refused to execute script" errors in browsers

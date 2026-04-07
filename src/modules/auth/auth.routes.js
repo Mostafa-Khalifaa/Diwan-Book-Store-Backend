@@ -17,7 +17,7 @@ router.post('/login',
 );
 
 router.post('/register',
-  makeLimiter(15 * 60 * 1000, 5),
+  makeLimiter(1 * 60 * 1000, 5),
 
   authValidators.RegisterInputValidator(),
   async (req, res) => {
@@ -27,7 +27,7 @@ router.post('/register',
 );
 
 router.post('/refresh',
-  makeLimiter(15 * 60 * 1000, 5),
+  makeLimiter(1 * 60 * 1000, 5),
 
   authValidators.RefreshInputValidator(),
   async (req, res) => {
@@ -37,7 +37,7 @@ router.post('/refresh',
   }
 );
 router.post('/logout', IsAuthenticated(),
-  makeLimiter(15 * 60 * 1000, 5),
+  makeLimiter(1 * 60 * 1000, 5),
   async (req, res) => {
     await authController.logout(req.user._id);
     res.sendStatus(200);
@@ -45,7 +45,7 @@ router.post('/logout', IsAuthenticated(),
 );
 
 router.get('/verify',
-  makeLimiter(15 * 60 * 1000, 5),
+  makeLimiter(1 * 60 * 1000, 5),
 
   async (req, res) => {
     const { token } = req.query;
@@ -58,7 +58,7 @@ router.get('/verify',
 
 //forget password request should send an email with a valid access token
 router.post('/forget-password',
-  makeLimiter(60 * 60 * 1000, 5),
+  makeLimiter(15 * 60 * 1000, 5),
   authValidators.ForgetPasswordValidator(),
   async (req, res) => {
     try {
@@ -74,7 +74,7 @@ router.post('/forget-password',
 );
 
 router.post('/reset-password',
-  makeLimiter(60 * 60 * 1000, 5),
+  makeLimiter(1 * 60 * 1000, 5),
   authValidators.resetPasswordValidator(),
   async (req, res) => {
     console.log(req.body);
